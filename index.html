@@ -1,0 +1,94 @@
+<div class="container">
+  <button onclick="generateNumber()">Generate</button>
+  <div id="result"></div>
+  <div id="copy"></div>
+</div>
+
+<script>
+  function generateNumber() {
+    var sequence = '';
+    for (var i = 0; i < 9; i++) {
+      sequence += Math.floor(Math.random() * 3); // выбираем случайное число из 0, 1, 2
+    }
+
+    // Присваивание рандомной комбинации из 0, 1, 2 к коду страны и начальной цифре 7
+    var randomNumber = '+44 7' + sequence;
+
+    var result = document.getElementById('result');
+    result.innerHTML = randomNumber;
+    result.classList.add('show');
+
+    var copyText = document.createElement('input');
+    copyText.setAttribute('type', 'text');
+    copyText.setAttribute('value', randomNumber);
+    document.body.appendChild(copyText);
+    copyText.select();
+    document.execCommand('copy');
+    document.body.removeChild(copyText);
+
+    var copyMessage = document.getElementById('copy');
+    copyMessage.innerHTML = 'Copied to clipboard!';
+    copyMessage.classList.add('show');
+  }
+</script>
+
+<style>
+  .container {
+    width: 300px;
+    height: 200px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  button:hover {
+    background-color: #0062cc;
+  }
+
+  #result {
+    font-size: 32px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #result.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #copy {
+    font-size: 16px;
+    color: green;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #copy.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
